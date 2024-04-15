@@ -16,7 +16,7 @@ const Header = ({ user }) => {
 
 
     return (
-        <View style={[styles.body, { height: user ? '25%' : '20%', borderBottomStartRadius:7, borderBottomEndRadius:7 }]}>
+        <View style={[styles.body, { height: user ? '25%' : '20%', borderBottomStartRadius: 7, borderBottomEndRadius: 7 }]}>
 
             {user ? (
                 <View>
@@ -37,8 +37,8 @@ const Header = ({ user }) => {
                 </View>
             ) : (
                 <View>
-                    <View style={[styles.containerImage, {marginTop:'15%', marginLeft: 0}]}>
-                        <Image source={img} style={[styles.imageLogout, {resizeMode: 'contain',}]} />
+                    <View style={[styles.containerImage, { marginTop: '15%', marginLeft: 0 }]}>
+                        <Image source={img} style={[styles.imageLogout, { resizeMode: 'contain', }]} />
                     </View>
 
                 </View>
@@ -51,7 +51,7 @@ const Header = ({ user }) => {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.primary
     },
     headerContainer: {
         flexDirection: 'row',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 100,
         // resizeMode: 'contain'
-    }, 
+    },
     imageLogout: {
         width: 200,
         height: 65,
