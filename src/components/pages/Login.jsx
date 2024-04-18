@@ -52,7 +52,7 @@ const Login = ({ navigation, setUser }) => {
                 <View style={{ alignItems: 'center' }}>
                     <TouchableOpacity
                         style={styles.btnLogin}
-                        onPress={() => navigation.navigate('Consultant', { prueba: 'acceso' })}
+                        onPress={() => navigation.navigate('Advisor', { prueba: 'acceso' })}
                     >
                         <Text style={styles.textLogin}>Iniciar sesión</Text>
                     </TouchableOpacity>

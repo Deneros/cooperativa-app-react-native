@@ -6,10 +6,10 @@ import ProductCard from "./ProductCard.jsx";
 const ProductList = () => {
     return (
         <FlatList
-            style={styles.container}
+            contentContainerStyle={styles.container}
             data={products}
             renderItem={({ item: product }) => (
-                <ProductCard {...product}/>
+                <ProductCard {...product} />
             )}
         />
     );
@@ -17,9 +17,9 @@ const ProductList = () => {
 
 const styles = StyleSheet.create({
     container: {
-      padding: 10,
-      marginTop: 20,
-      flex:1,
+        paddingHorizontal: 10,
+        paddingVertical: 20,
+        gap: 20
     },
 });
 
