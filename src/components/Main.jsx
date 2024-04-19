@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from "./pages/Login.jsx";
 import Advisor from "./pages/Advisor.jsx";
 import Consultant from "./pages/Consultant.jsx";
+import Documents from "./pages/Documents.jsx";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,8 +34,13 @@ const Main = () => {
                         name='Consultant'
                         options={{ headerShown: false }}
                     >
-                        {props => <Consultant {...props} />}
+                        {props => <Consultant />}
                     </Stack.Screen>
+                    <Stack.Screen
+                        name='Documents'
+                        component={Documents}
+                        options={{ headerShown: false }}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
             <Footer />

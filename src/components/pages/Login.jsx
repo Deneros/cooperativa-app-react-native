@@ -2,6 +2,7 @@ import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
 import theme from "../../theme";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ButtonCard from "../ButtonCard";
 
 const Login = ({ navigation, setUser }) => {
     const [email, setEmail] = useState('')
@@ -61,25 +62,8 @@ const Login = ({ navigation, setUser }) => {
 
             <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <View style={styles.optionsContainer}>
-                    <TouchableOpacity
-                        style={styles.options}
-                    // onPress={() => navigation.navigate('Advisor', { prueba: 'acceso' })}
-                    >
-                        <View style={styles.optionIcon}>
-                            <MaterialCommunityIcons name="account-outline" size={30} />
-                        </View>
-                        <Text style={{ textAlign: 'center' }}>Registrarme en la app</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.options}
-                    // onPress={() => navigation.navigate('Advisor', { prueba: 'acceso' })}
-                    >
-                        <View style={styles.optionIcon}>
-                            <MaterialCommunityIcons name="headset" size={30} />
-                        </View>
-                        <Text>Atención al cliente</Text>
-                    </TouchableOpacity>
+                    <ButtonCard icon='account-outline' text='Registrarme en la app' position='center' />
+                    <ButtonCard icon='headset' text='Atención al cliente' position='center' />
                 </View>
             </View >
         </View >
@@ -131,25 +115,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 20,
     },
-    options: {
-        flex: 1,
-        gap: 5,
-        justifyContent: 'center',
-        paddingHorizontal: 15,
-        paddingVertical: 30,
-        alignItems: 'center',
-        backgroundColor: theme.colors.white,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: theme.colors.lightGray,
-    },
-    optionIcon: {
-        padding: 5,
-        borderRadius: 99,
-        borderColor: theme.colors.lightGray,
-        borderWidth: 1,
-        justifyContent: 'center'
-    }
 })
 
 export default Login

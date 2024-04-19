@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import products from "../data/products.js";
 import ProductCard from "./ProductCard.jsx";
 
@@ -18,7 +18,8 @@ const ProductList = () => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
-        paddingVertical: 20,
+        paddingTop: 2,
+        paddingBottom: 20,
         gap: 20
     },
 });
