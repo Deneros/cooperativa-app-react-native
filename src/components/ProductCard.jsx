@@ -1,40 +1,32 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity  } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import StyledText from "./StyledText.jsx";
 import theme from "../theme.js";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-
-
-
-
-
+import { MaterialCommunityIcons, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 const CardHeader = ({ title, id }) => (
     <View style={styles.header}>
         <View style={styles.headerContent}>
             <View style={styles.headerMark} />
-                <View style={{marginRight:10}}>
-                    { id ==='ca' && (
-                        <MaterialCommunityIcons name="piggy-bank-outline" size={24} color="black" />
-                    )}
-                    { id ==='cc' && (
-                        <MaterialIcons name="account-balance-wallet" size={24} color="black" />
-                    )}
-                    { id ==='tc' && (
-                        <Ionicons name="receipt-outline" size={24} color="black" />
-                    )}
-                    { id ==='ch' && (
-                        <AntDesign name="home" size={24} color="black" />
-                    )}
-                </View>
+            <View style={{ marginRight: 10 }}>
+                {id === 'ca' && (
+                    <MaterialCommunityIcons name="piggy-bank-outline" size={24} color="black" />
+                )}
+                {id === 'cc' && (
+                    <Ionicons name="wallet-outline" size={24} color="black" />
+                )}
+                {id === 'tc' && (
+                    <Ionicons name="receipt-outline" size={24} color="black" />
+                )}
+                {id === 'ch' && (
+                    <AntDesign name="home" size={24} color="black" />
+                )}
+            </View>
             <StyledText fontSize='subHeading' fontWeight='bold' style={styles.title}>{title}</StyledText>
         </View>
         <View>
             <TouchableOpacity>
-                <Ionicons style={styles.menu} name="options-outline" size={24} color="black" />
+                <Ionicons style={styles.menu} name="ellipsis-horizontal" size={24} color={theme.colors.primary} />
             </TouchableOpacity>
         </View>
     </View>
@@ -42,33 +34,33 @@ const CardHeader = ({ title, id }) => (
 
 const CardBody = (props) => (
     <View style={styles.body}>
-    {props.accountNumber && (
-        <StyledText style={styles.item}>Numero de Cuenta: {props.accountNumber}</StyledText>
-    )}
+        {props.accountNumber && (
+            <StyledText style={styles.item}>Numero de Cuenta: {props.accountNumber}</StyledText>
+        )}
 
-    {props.balance && (
-        <StyledText style={styles.item}>Saldo Disponible: {props.balance} {props.currency}</StyledText>
-    )}
+        {props.balance && (
+            <StyledText style={styles.item}>Saldo Disponible: {props.balance} {props.currency}</StyledText>
+        )}
 
-    {props.cardNumber && (
-        <StyledText style={styles.item}>Numero de Tarjeta: {props.cardNumber}</StyledText>
-    )}
+        {props.cardNumber && (
+            <StyledText style={styles.item}>Numero de Tarjeta: {props.cardNumber}</StyledText>
+        )}
 
-    {props.creditLimit && (
-        <StyledText style={styles.item}>Cupo de Compras: {props.creditLimit} {props.currency}</StyledText>
-    )}
+        {props.creditLimit && (
+            <StyledText style={styles.item}>Cupo de Compras: {props.creditLimit} {props.currency}</StyledText>
+        )}
 
-    {props.loanNumber && (
-        <StyledText style={styles.item}>Numero de Préstamo: {props.loanNumber}</StyledText>
-    )}
+        {props.loanNumber && (
+            <StyledText style={styles.item}>Numero de Préstamo: {props.loanNumber}</StyledText>
+        )}
 
-    {props.loanAmount && (
-        <StyledText style={styles.item}>Monto del Préstamo: {props.loanAmount} {props.currency}</StyledText>
-    )}
+        {props.loanAmount && (
+            <StyledText style={styles.item}>Monto del Préstamo: {props.loanAmount} {props.currency}</StyledText>
+        )}
 
-    {props.remainingBalance && (
-        <StyledText style={styles.item}>Saldo Restante: {props.remainingBalance} {props.currency}</StyledText>
-    )}
+        {props.remainingBalance && (
+            <StyledText style={styles.item}>Saldo Restante: {props.remainingBalance} {props.currency}</StyledText>
+        )}
     </View>
 );
 
@@ -79,7 +71,7 @@ const CardFooter = () => (
 
 const ProductCard = (props) => (
     <View key={Math.random().toString()} style={styles.container}>
-        <CardHeader title={props.product} id={props.id} />
+        <CardHeader title={props.title} id={props.id} />
         <CardBody {...props} />
         <CardFooter />
     </View>
@@ -88,11 +80,8 @@ const ProductCard = (props) => (
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20,
-        paddingBottom: 5,
-        paddingTop: 5,
-        backgroundColor: "#fff",
-        borderRadius: 10,
+        backgroundColor: theme.colors.white,
+        borderRadius: 8,
         elevation: 3,
         shadowColor: "#000",
         shadowOffset: {
@@ -101,48 +90,35 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        marginLeft:2,
-        marginRight:2
+        marginHorizontal: 2,
     },
-    
     header: {
         flexDirection: 'row',
-        alignItems: 'center', 
         justifyContent: 'space-between',
-        marginTop:20,
+        marginTop: 10,
+        paddingVertical: 10,
+        marginRight: 15,
     },
     headerContent: {
         flexDirection: 'row',
-        alignItems: 'center', 
-        height: '100%'
-    },
-    icon: {
-        marginRight: 5, 
-    },
-    title: {
-        marginRight: 5,
-    },
-    menu: {
-        // fontSize: 20, 
-        marginRight:15
+        alignItems: 'center',
     },
     body: {
-        paddingTop: '8%',
-        marginBottom: 10,
-        marginLeft: '15%',
-        height: 125,
-        fontSize: theme.fontSizes.subHeading,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
     },
     item: {
-        marginBottom: 20,
+        marginBottom: 5,
         fontSize: theme.fontSizes.body
     },
     footer: {
+        paddingVertical: 10,
+        paddingHorizontal: 15,
     },
     headerMark: {
         height: '100%',
         width: 5,
-        backgroundColor: theme.colors.third,
+        backgroundColor: theme.colors.primary,
         marginRight: 10
     }
 });

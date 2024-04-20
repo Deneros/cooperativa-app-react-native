@@ -3,31 +3,31 @@ import { Text, StyleSheet } from "react-native";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-    text:{
+    text: {
         color: theme.colors.textPrimary,
         fontSize: theme.fontSizes.body,
         fontFamily: theme.fonts.main,
-        fontWeight: theme. fontWeights.normal
+        fontWeight: theme.fontWeights.normal
     },
-    colorPrimary:{
+    colorPrimary: {
         color: theme.colors.primary
     },
-    colorSecundary:{
+    colorSecundary: {
         color: theme.colors.textSecondary
     },
-    bold:{
+    bold: {
         fontWeight: theme.fontWeights.bold
     },
-    subHeading:{
+    subHeading: {
         fontSize: theme.fontSizes.subHeading
     },
-    textAlignCenter:{
+    textAlignCenter: {
         textAlign: 'center'
     }
 
 })
 
-export default function StyledText({children, color, fontSize, align, fontWeight, style, ...restOfProps }) {
+export default function StyledText({ children, color, fontSize, align, fontWeight, style, ...restOfProps }) {
     const textStyles = [
         styles.text,
         color === 'primary' && styles.colorPrimary,
@@ -39,9 +39,9 @@ export default function StyledText({children, color, fontSize, align, fontWeight
     ]
 
     return (
-        <Text style={textStyles}{...restOfProps}> 
+        <Text style={textStyles}{...restOfProps}>
             {children}
-        
+
         </Text>
     )
 }

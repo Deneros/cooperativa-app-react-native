@@ -4,8 +4,10 @@ import Header from "./layout/Header.jsx";
 import Footer from "./layout/Footer.jsx";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Advisor from "./pages/Advisor.jsx";
 import Login from "./pages/Login.jsx";
+import Advisor from "./pages/Advisor.jsx";
+import Consultant from "./pages/Consultant.jsx";
+import Documents from "./pages/Documents.jsx";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +16,7 @@ const Main = () => {
 
     return (
         <View style={mainStyle.layout}>
-            <Header  user={user} />
+            <Header user={user} />
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
@@ -28,6 +30,17 @@ const Main = () => {
                         component={Advisor}
                         options={{ headerShown: false }}
                     />
+                    <Stack.Screen
+                        name='Consultant'
+                        options={{ headerShown: false }}
+                    >
+                        {props => <Consultant />}
+                    </Stack.Screen>
+                    <Stack.Screen
+                        name='Documents'
+                        component={Documents}
+                        options={{ headerShown: false }}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
             <Footer />
@@ -38,7 +51,6 @@ const Main = () => {
 const mainStyle = StyleSheet.create({
     layout: {
         flex: 1,
-        backgroundColor: '#f4f4f4'
     }
 })
 
