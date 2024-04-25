@@ -9,8 +9,8 @@ const Documents = () => {
         <View style={styles.container}>
             <StyledText fontSize='subHeading' fontWeight='bold' style={{ fontWeight: 'bold' }}>Selecciona una opción</StyledText>
             <ScrollView contentContainerStyle={styles.documents}>
-                {documents.map((document) =>
-                    <ButtonCard icon={document.icon} text={document.text} />
+                {documents.map((document, i) =>
+                    <ButtonCard key={i} icon={document.icon} text={document.text} />
                 )}
             </ScrollView>
         </View>
