@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import StyledText from "../StyledText.jsx";
 import theme from "../../theme.js";
 
-const Advisor = ({ navigation }) => {
+const Adviser = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.options}>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Advisor
+export default Adviser

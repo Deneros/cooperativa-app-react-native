@@ -2,24 +2,19 @@ import React, { useEffect } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import theme from "../../theme";
 import img from "../../../assets/logo.png";
-import Constants from 'expo-constants';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 const Header = ({ user }) => {
-
     useEffect(() => {
         console.log(user)
     }, [])
 
-
-
     return (
-        <View style={[styles.body, { height: user ? '25%' : '20%', borderBottomStartRadius: 7, borderBottomEndRadius: 7 }]}>
-
+        <View style={styles.body}>
             {user ? (
-                <View>
+                <View style={styles.container}>
                     <View style={styles.headerContainer}>
                         <View style={styles.containerImage}>
                             <Image source={img} style={styles.image} />
@@ -30,64 +25,60 @@ const Header = ({ user }) => {
                             <Entypo style={styles.icon} name="paypal" size={24} color="white" />
                         </View>
                     </View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.greetingText}>Buen dia,</Text>
+                    <View>
+                        <Text style={styles.greetingText}>Buen día,</Text>
                         <Text style={styles.usernameText}>Asesor Nicolas</Text>
                     </View>
                 </View>
             ) : (
-                <View>
-                    <View style={[styles.containerImage, { marginTop: '15%', marginLeft: 0 }]}>
-                        <Image source={img} style={[styles.imageLogout, { resizeMode: 'contain', }]} />
+                <View style={{ marginVertical: 20 }}>
+                    <View style={styles.containerImage}>
+                        <Image source={img} style={styles.imageLogout} />
                     </View>
-
                 </View>
             )}
-
-
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: theme.colors.primary
+        backgroundColor: theme.colors.primary,
+        borderBottomStartRadius: 7,
+        borderBottomEndRadius: 7
+    },
+    container: {
+        padding: 10,
+        paddingBottom: 20,
+        gap: 10
     },
     headerContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: Constants.statusBarHeight,
     },
     containerImage: {
-        // padding: 10,
         alignSelf: 'center',
         backgroundColor: 'white',
         borderRadius: 100,
-        marginLeft: 10
     },
     image: {
-        width: 65,
+        width: 50,
         height: 50,
+        objectFit: 'contain',
         borderRadius: 100,
-        // resizeMode: 'contain'
+        margin: 10,
     },
     imageLogout: {
         width: 200,
         height: 65,
         borderRadius: 100,
+        objectFit: 'contain'
     },
     iconsContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: Constants.statusBarHeight,
-        marginRight: 10,
     },
     icon: {
         marginRight: 7,
-    },
-    textContainer: {
-        marginLeft: 15,
-        marginTop: 10,
     },
     greetingText: {
         color: 'white',

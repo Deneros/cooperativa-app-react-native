@@ -1,72 +1,101 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
-import theme from "../../theme";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
+import { useForm, Controller } from 'react-hook-form';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ButtonCard from "../ButtonCard";
+import theme from "../../theme";
+import users from "../../data/users";
 
 const Login = ({ navigation, setUser }) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const { control, handleSubmit, errors } = useForm();
     const [showPassword, setShowPassword] = useState(false)
 
-    const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
+    const login = (data) => {
+        const user = users.find(user => user.email === data.email && user.password === data.password)
+        if (user) {
+            setUser(user)
+            if (user.role === 'adviser')
+                navigation.navigate('Adviser', { prueba: 'acceso' })
+            else if (user.role === 'consultant')
+                navigation.navigate('Consultant', { prueba: 'acceso' })
+        }
+    }
 
     const recoverPassword = () => { }
 
     return (
-        <View style={{ flex: 1, padding: 20 }}>
-            <View style={{ gap: 10 }}>
-                <View style={{ marginVertical: 30 }}>
-                    <Text style={styles.title}>Bienvenido!</Text>
-                    <Text style={styles.subtitle}>Por favor inicia sesión para continuar</Text>
-                </View>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+        >
+            <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
+                <View style={{ gap: 10 }}>
+                    <View style={{ marginVertical: '5%' }}>
+                        <Text style={styles.title}>Bienvenido!</Text>
+                        <Text style={styles.subtitle}>Por favor inicia sesión para continuar</Text>
+                    </View>
 
-                <TextInput
-                    placeholder="Correo"
-                    style={styles.textInput}
-                    value={email}
-                    onChangeText={setEmail}
-                />
-                <View>
-                    <TextInput
-                        placeholder="Contraseña"
-                        style={styles.textInput}
-                        secureTextEntry={!showPassword}
-                        value={password}
-                        onChangeText={setPassword}
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <TextInput
+                                onChangeText={onChange}
+                                onBlur={onBlur}
+                                value={value}
+                                placeholder="Correo"
+                                style={styles.textInput}
+                            />
+                        )}
+                        name="email"
+                        rules={{ required: true }}
+                    />
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <View>
+                                <TextInput
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    value={value}
+                                    placeholder="Contraseña"
+                                    style={styles.textInput}
+                                    secureTextEntry={!showPassword}
+                                />
+                                <TouchableOpacity
+                                    style={styles.btnPassword}
+                                    onPress={() => setShowPassword(!showPassword)}
+                                >
+                                    <MaterialCommunityIcons name={showPassword ? 'eye-outline' : 'eye-off-outline'} size={20} />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        name="password"
+                        rules={{ required: true }}
                     />
                     <TouchableOpacity
-                        style={styles.btnPassword}
-                        onPress={toggleShowPassword}
+                        onPress={recoverPassword}
                     >
-                        <MaterialCommunityIcons name={showPassword ? 'eye-outline' : 'eye-off-outline'} size={20} />
+                        <Text style={styles.textRecoveryPassword}>Olvidé mi contraseña</Text>
                     </TouchableOpacity>
-                </View>
-                <TouchableOpacity
-                    onPress={recoverPassword}
-                >
-                    <Text style={styles.textRecoveryPassword}>Olvidé mi contraseña</Text>
-                </TouchableOpacity>
 
-                <View style={{ alignItems: 'center' }}>
-                    <TouchableOpacity
-                        style={styles.btnLogin}
-                        onPress={() => navigation.navigate('Advisor', { prueba: 'acceso' })}
-                    >
-                        <Text style={styles.textLogin}>Iniciar sesión</Text>
-                    </TouchableOpacity>
+                    <View style={{ alignItems: 'center' }}>
+                        <TouchableOpacity
+                            style={styles.btnLogin}
+                            onPress={handleSubmit(login)}
+                        >
+                            <Text style={styles.textLogin}>Iniciar sesión</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View >
 
-            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                <View style={styles.optionsContainer}>
-                    <ButtonCard icon='account-outline' text='Registrarme en la app' position='center' />
-                    <ButtonCard icon='headset' text='Atención al cliente' position='center' />
+                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                    <View style={styles.optionsContainer}>
+                        <ButtonCard icon='account-outline' text='Registrarme en la app' position='center' />
+                        <ButtonCard icon='headset' text='Atención al cliente' position='center' />
+                    </View>
                 </View>
-            </View >
-        </View >
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -85,7 +114,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         textAlign: 'center',
         padding: 15,
-        marginTop: 20
+        marginTop: '5%'
     },
     textLogin: {
         textAlign: 'center',
@@ -114,6 +143,7 @@ const styles = StyleSheet.create({
     optionsContainer: {
         flexDirection: 'row',
         gap: 20,
+        marginTop: 30,
     },
 })
 
